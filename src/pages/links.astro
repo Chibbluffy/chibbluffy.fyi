@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const links = [
+  // Add your links here, e.g.:
+  // { label: 'github', url: 'https://github.com/yourhandle', note: 'code stuff' },
+  // { label: 'boop.fish', url: 'https://boop.fish', note: 'guild site' },
+];
+---
+
+<Layout title="links">
+  <section class="hero">
+    <h1>links</h1>
+    <p>places on the internet i hang out or stuff i made.</p>
+  </section>
+
+  {links.length > 0 ? (
+    <ul class="link-list">
+      {links.map(l => (
+        <li>
+          <a href={l.url} target="_blank" rel="noopener">{l.label}</a>
+          {l.note && <span class="note">— {l.note}</span>}
+        </li>
+      ))}
+    </ul>
+  ) : (
+    <p class="empty">nothing here yet.</p>
+  )}
+</Layout>
+
+<style>
+  .hero {
+    padding: 5rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+
+  h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    color: var(--text-muted);
+  }
+
+  .link-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .link-list li {
+    font-size: 1rem;
+  }
+
+  .note {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-left: 0.25rem;
+  }
+
+  .empty {
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+  }
+</style>

@@ -1,0 +1,119 @@
+---
+import type { Project } from '../data/projects';
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const link = project.url ?? project.repo;
+---
+
+<article class:list={['card', { wip: project.wip }]}>
+  <div class="top">
+    <h3>
+      {link ? <a href={link} target="_blank" rel="noopener">{project.name}</a> : project.name}
+      {project.wip && <span class="badge">wip</span>}
+    </h3>
+    <div class="links">
+      {project.url && <a href={project.url} target="_blank" rel="noopener" aria-label="visit site">↗</a>}
+      {project.repo && <a href={project.repo} target="_blank" rel="noopener" aria-label="source">src</a>}
+    </div>
+  </div>
+  <p>{project.description}</p>
+  <ul class="tags">
+    {project.tags.map(tag => <li>{tag}</li>)}
+  </ul>
+</article>
+
+<style>
+  .card {
+    background: var(--bg-surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    transition: border-color 0.15s, background 0.15s;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+    background: var(--bg-elevated);
+  }
+
+  .top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  h3 {
+    font-size: 1rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  h3 a {
+    color: var(--text);
+  }
+
+  h3 a:hover {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  .links {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    flex-shrink: 0;
+  }
+
+  .links a {
+    color: var(--text-muted);
+  }
+
+  .links a:hover {
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  p {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .tags {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.25rem;
+  }
+
+  .tags li {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    background: var(--accent-dim);
+    color: var(--accent);
+    padding: 0.15rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  .badge {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    background: #ff6b3333;
+    color: #ff6b33;
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+    font-weight: 400;
+  }
+</style>
