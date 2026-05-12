@@ -68,10 +68,11 @@ export const projects: Project[] = [
   // --- Tools & Apps ---
   {
     name: 'Fireworks Demo System',
-    description: 'Windows app that manages fireworks inventory and demo videos, letting customers see what a firework does before buying. Source is private — releases available to download.',
+    description: 'Two-part Windows sales tool for fireworks retailers. The manager handles inventory and lets you associate demo videos with products. The display player runs a video playlist on loop, and if a barcode scanner scans a product it stops, plays that product\'s demo video, then resumes where it left off. Source is private but releases are available to download.',
     repo: 'https://github.com/Chibbluffy/FireworksDemoSystemReleases',
-    tags: ['desktop', 'windows', 'inventory'],
+    tags: ['desktop', 'windows', 'inventory manager', 'media player'],
     category: 'tools',
+    wip: true,
   },
   {
     name: 'VRBO Availability Checker',
