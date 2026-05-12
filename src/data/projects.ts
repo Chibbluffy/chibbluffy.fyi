@@ -46,7 +46,7 @@ export const projects: Project[] = [
     name: 'backyard-monsters-refitted',
     description: 'Open source revival of Backyard Monsters. I contribute to this project.',
     repo: 'https://github.com/bym-refitted/backyard-monsters-refitted',
-    tags: ['open source', 'game'],
+    tags: ['open source', 'flash', 'game'],
     category: 'bymr',
   },
   // --- BDO Guild ---
@@ -62,7 +62,7 @@ export const projects: Project[] = [
     name: 'BoopBot',
     description: 'Discord bot companion to boop.fish. Shares the same database and runs on the same server.',
     repo: 'https://github.com/Chibbluffy/BoopBot',
-    tags: ['discord', 'bot', 'bun'],
+    tags: ['discord', 'bot', 'python'],
     category: 'guild',
   },
   // --- Tools & Apps ---
