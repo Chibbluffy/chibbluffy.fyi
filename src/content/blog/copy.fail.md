@@ -35,6 +35,7 @@ g.system("su")
 ```
 uname -r.
 ```
+The fix is reverting the 2017 algif_aead in-place optimization in the commit a664bf3d603d, so just make sure your kernel version includes that change.
 
 ## Reasons it's so hard to detect
   - The file on disk is never touched. Only the kernel's cached copy in memory is.
