@@ -9,11 +9,12 @@ const { project } = Astro.props;
 const link = project.url ?? project.repo;
 ---
 
-<article class:list={['card', { wip: project.wip }]}>
+<article class:list={['card', { wip: project.wip, archived: project.archived }]}>
   <div class="top">
     <h3>
       {link ? <a href={link} target="_blank" rel="noopener">{project.name}</a> : project.name}
-      {project.wip && <span class="badge">wip</span>}
+      {project.wip && <span class="badge wip">wip</span>}
+      {project.archived && <span class="badge archived">archived</span>}
     </h3>
     <div class="links">
       {project.url && <a href={project.url} target="_blank" rel="noopener" aria-label="visit site">↗</a>}
@@ -110,10 +111,18 @@ const link = project.url ?? project.repo;
   .badge {
     font-family: var(--font-mono);
     font-size: 0.65rem;
-    background: #ff6b3333;
-    color: #ff6b33;
     padding: 0.1rem 0.4rem;
     border-radius: 4px;
     font-weight: 400;
+  }
+
+  .badge.wip {
+    background: #ff6b3333;
+    color: #ff6b33;
+  }
+
+  .badge.archived {
+    background: #ffffff15;
+    color: var(--text-muted);
   }
 </style>

@@ -1,20 +1,32 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
-import { projects } from '../data/projects';
+import { projects, categories } from '../data/projects';
+import type { Project } from '../data/projects';
+
+const grouped = Object.entries(categories).reduce((acc, [key]) => {
+  const cat = key as Project['category'];
+  const items = projects.filter(p => p.category === cat);
+  if (items.length > 0) acc.push([cat, items]);
+  return acc;
+}, [] as [Project['category'], Project[]][]);
 ---
 
 <Layout>
   <section class="hero">
-    <h1>hey, i'm <span class="accent">chibbluffy</span></h1>
-    <p class="tagline">i make things for the web and mess around with stuff i find interesting.</p>
+    <h1>Hiya, i'm <span class="accent">chibbluffy</span></h1>
+    <p class="tagline">I like to make things and mess around with stuff i find interesting.</p>
   </section>
 
   <section id="projects">
-    <h2>projects</h2>
-    <div class="grid">
-      {projects.map(p => <ProjectCard project={p} />)}
-    </div>
+    {grouped.map(([cat, items]) => (
+      <div class="group">
+        <h2>{categories[cat]}</h2>
+        <div class="grid">
+          {items.map(p => <ProjectCard project={p} />)}
+        </div>
+      </div>
+    ))}
   </section>
 </Layout>
 
@@ -43,7 +55,14 @@ import { projects } from '../data/projects';
     max-width: 480px;
   }
 
-  h2 {
+  #projects {
+    margin-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .group h2 {
     font-family: var(--font-mono);
     font-size: 0.8rem;
     font-weight: 500;
@@ -51,10 +70,6 @@ import { projects } from '../data/projects';
     letter-spacing: 0.1em;
     color: var(--text-muted);
     margin-bottom: 1.25rem;
-  }
-
-  #projects {
-    margin-bottom: 4rem;
   }
 
   .grid {
