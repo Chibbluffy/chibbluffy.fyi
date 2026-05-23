@@ -67,6 +67,13 @@ export const projects: Project[] = [
   },
   // --- Tools & Apps ---
   {
+    name: 'Unattended Cooking Alert',
+    description: 'Thermal camera on a Raspberry Pi Zero streams stove footage to a phone running Termux, which handles image processing and fires verbal alerts and notifications if the stove is left unattended. Built to help prevent kitchen fires for elderly or forgetful users.',
+    repo: 'https://github.com/Chibbluffy/unattended-cooking-alert',
+    tags: ['raspberry pi', 'thermal camera', 'safety', 'home automation'],
+    category: 'tools',
+  },
+  {
     name: 'Fireworks Demo System',
     description: 'Two-part Windows sales tool for fireworks retailers. The manager handles inventory and lets you associate demo videos with products. The display player runs a video playlist on loop, and if a barcode scanner scans a product it stops, plays that product\'s demo video, then resumes where it left off. Source is private but releases are available to download.',
     repo: 'https://github.com/Chibbluffy/FireworksDemoSystemReleases',
@@ -92,6 +99,13 @@ export const projects: Project[] = [
     wip: true,
   },
   // --- Other ---
+  {
+    name: 'dotfiles',
+    description: 'My personal shell and tool configuration files.',
+    repo: 'https://github.com/Chibbluffy/dotfiles',
+    tags: ['dotfiles', 'config'],
+    category: 'other',
+  },
   {
     name: 'Advent of Code 2025',
     description: 'My solutions for Advent of Code 2025.',
