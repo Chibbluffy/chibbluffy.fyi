@@ -20,7 +20,21 @@ const online = [
 ];
 
 const shortcuts = [
-  // { label: 'Example Tool', note: 'what it is', url: 'https://example.com' },
+  // { label: 'Example', note: 'quick description', url: 'https://example.com' },
+];
+
+const tools = [
+  { label: 'Home Assistant', note: '', url: 'https://.com' },
+  { label: 'Hello Willow Github', note: 'Voice Assistant', url: 'https://github.com/HeyWillow/willow' },
+  { label: 'Rekt.network', note: 'cyberpunk radio; Includes chat', url: 'https://rekt.network/' },
+  { label: 'Tune My Music', note: 'playlist transfer tool', url: 'https://tunemymusic.com/transfer' },
+  { label: 'Credit Card Points Transfer', note: 'Updated page with transfer bonuses', url: 'https://travel-on-points.com/current-point-transfer-bonuses' },
+  { label: 'Equinox.space', note: 'Browser game', url: 'https://equinox.space' },
+  { label: 'Ratty-term', note: 'GPU Rendered terminal emulator with inline 3D graphics', url: 'https://ratty-term.org' },
+  { label: 'GitNexus', note: 'Explore github repo as a knowledge graph. Good for RAG and AI agents', url: 'https://gitnexus.vercel.app' },
+  { label: 'GitNexus Source', note: 'Explore github repo as a knowledge graph. Good for RAG and AI agents', url: 'https://github.com/abhigyanpatwari/GitNexus' },
+  { label: 'MVIDIA', note: 'Game of how to build a GPU', url: 'https://jaso1024.com/mvidia' },
+  // { label: 'Example', note: 'what', url: 'https://' },
 ];
 
 const sites = [
@@ -79,6 +93,28 @@ const sites = [
             </li>
           ))}
         </ul>
+      </section>
+    )}
+
+    {tools.length > 0 && (
+      <section>
+        <h2>tools &amp; resources</h2>
+        <input
+          type="text"
+          id="tools-search"
+          placeholder="search..."
+          autocomplete="off"
+          spellcheck="false"
+        />
+        <ul class="link-list" id="tools-list">
+          {tools.map(l => (
+            <li data-search={`${l.label} ${l.note ?? ''}`.toLowerCase()}>
+              <a href={l.url} target="_blank" rel="noopener">{l.label}</a>
+              {l.note && <span class="note">— {l.note}</span>}
+            </li>
+          ))}
+        </ul>
+        <p class="no-results" id="tools-no-results">no results</p>
       </section>
     )}
 
@@ -155,4 +191,57 @@ const sites = [
     color: var(--text-muted);
     font-size: 0.85rem;
   }
+
+  #tools-search {
+    display: block;
+    width: 100%;
+    max-width: 20rem;
+    margin-bottom: 1rem;
+    padding: 0.35rem 0.6rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    outline: none;
+  }
+
+  #tools-search:focus {
+    border-color: var(--text-muted);
+  }
+
+  #tools-search::placeholder {
+    color: var(--text-muted);
+    opacity: 0.6;
+  }
+
+  .no-results {
+    display: none;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+  }
 </style>
+
+<script>
+  const input = document.getElementById('tools-search') as HTMLInputElement | null;
+  const list = document.getElementById('tools-list');
+  const noResults = document.getElementById('tools-no-results');
+
+  input?.addEventListener('input', () => {
+    const query = input.value.toLowerCase().trim();
+    const items = list?.querySelectorAll<HTMLLIElement>('li') ?? [];
+    let visible = 0;
+
+    for (const item of items) {
+      const match = !query || item.dataset.search?.includes(query);
+      item.style.display = match ? '' : 'none';
+      if (match) visible++;
+    }
+
+    if (noResults) {
+      noResults.style.display = visible === 0 && query ? 'block' : 'none';
+    }
+  });
+</script>
