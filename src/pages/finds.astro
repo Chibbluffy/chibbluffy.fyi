@@ -1,0 +1,258 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const finds = [
+  { label: 'Home Assistant', note: '', tags: ['tool', 'self-hosted'], url: 'https://.com' },
+  { label: 'Hello Willow', note: 'Open source voice assistant', tags: ['tool', 'self-hosted', 'ai'], url: 'https://github.com/HeyWillow/willow' },
+  { label: 'Rekt.network', note: 'Cyberpunk radio with chat', tags: ['media', 'music'], url: 'https://rekt.network/' },
+  { label: 'Tune My Music', note: 'Playlist transfer between services', tags: ['tool', 'music'], url: 'https://tunemymusic.com/transfer' },
+  { label: 'Credit Card Points Transfer', note: 'Current transfer bonuses', tags: ['finance', 'travel'], url: 'https://travel-on-points.com/current-point-transfer-bonuses' },
+  { label: 'Equinox.space', note: 'Browser game', tags: ['game'], url: 'https://equinox.space' },
+  { label: 'Ratty-term', note: 'GPU rendered terminal with inline 3D graphics', tags: ['tool', 'dev'], url: 'https://ratty-term.org' },
+  { label: 'GitNexus', note: 'Explore a GitHub repo as a knowledge graph', tags: ['tool', 'dev', 'ai'], url: 'https://gitnexus.vercel.app' },
+  { label: 'GitNexus Source', note: 'Source repo', tags: ['dev', 'ai'], url: 'https://github.com/abhigyanpatwari/GitNexus' },
+  { label: 'MVIDIA', note: 'Game about building a GPU', tags: ['game', 'dev'], url: 'https://jaso1024.com/mvidia' },
+  // { label: '', note: '', tags: [], url: '' },
+];
+
+const allTags = [...new Set(finds.flatMap(f => f.tags))].sort();
+---
+
+<Layout title="finds">
+  <section class="hero">
+    <h1>finds</h1>
+    <p class="subtitle">tools, games, and other things worth bookmarking</p>
+  </section>
+
+  <div class="controls">
+    <input
+      type="text"
+      id="finds-search"
+      placeholder="search..."
+      autocomplete="off"
+      spellcheck="false"
+    />
+    <div class="tag-filters" id="tag-filters">
+      {allTags.map(tag => (
+        <button class="tag-btn" data-tag={tag}>{tag}</button>
+      ))}
+    </div>
+  </div>
+
+  <ul class="finds-list" id="finds-list">
+    {finds.map(f => (
+      <li data-search={`${f.label} ${f.note} ${f.tags.join(' ')}`.toLowerCase()}>
+        <div class="find-main">
+          <a href={f.url} target="_blank" rel="noopener">{f.label}</a>
+          {f.note && <span class="note">{f.note}</span>}
+        </div>
+        {f.tags.length > 0 && (
+          <div class="tags">
+            {f.tags.map(tag => (
+              <span class="tag" data-tag={tag}>{tag}</span>
+            ))}
+          </div>
+        )}
+      </li>
+    ))}
+  </ul>
+  <p class="no-results" id="finds-no-results">no results</p>
+</Layout>
+
+<style>
+  .hero {
+    padding: 5rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2rem;
+  }
+
+  h1 {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+  }
+
+  .subtitle {
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+  }
+
+  .controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+  }
+
+  #finds-search {
+    width: 100%;
+    max-width: 24rem;
+    padding: 0.35rem 0.6rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    color: var(--text);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    outline: none;
+  }
+
+  #finds-search:focus {
+    border-color: var(--text-muted);
+  }
+
+  #finds-search::placeholder {
+    color: var(--text-muted);
+    opacity: 0.6;
+  }
+
+  .tag-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .tag-btn {
+    padding: 0.2rem 0.55rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s, background 0.15s;
+  }
+
+  .tag-btn:hover {
+    color: var(--text);
+    border-color: var(--text-muted);
+  }
+
+  .tag-btn.active {
+    background: var(--text);
+    color: var(--bg);
+    border-color: var(--text);
+  }
+
+  .finds-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 4rem;
+  }
+
+  .finds-list li {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+
+  .find-main {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .find-main a {
+    font-size: 0.95rem;
+    white-space: nowrap;
+  }
+
+  .note {
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.35rem;
+    flex-shrink: 0;
+  }
+
+  .tag {
+    padding: 0.15rem 0.45rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .tag:hover {
+    color: var(--text);
+    border-color: var(--text-muted);
+  }
+
+  .no-results {
+    display: none;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
+    margin-bottom: 4rem;
+  }
+</style>
+
+<script>
+  const input = document.getElementById('finds-search') as HTMLInputElement | null;
+  const list = document.getElementById('finds-list');
+  const noResults = document.getElementById('finds-no-results');
+  const tagBtns = document.querySelectorAll<HTMLButtonElement>('.tag-btn');
+  const tagChips = document.querySelectorAll<HTMLSpanElement>('.tag');
+
+  let activeTag: string | null = null;
+
+  function filter() {
+    const query = input?.value.toLowerCase().trim() ?? '';
+    const items = list?.querySelectorAll<HTMLLIElement>('li') ?? [];
+    let visible = 0;
+
+    for (const item of items) {
+      const searchText = item.dataset.search ?? '';
+      const matchesQuery = !query || searchText.includes(query);
+      const matchesTag = !activeTag || searchText.split(' ').includes(activeTag);
+      const show = matchesQuery && matchesTag;
+      item.style.display = show ? '' : 'none';
+      if (show) visible++;
+    }
+
+    if (noResults) {
+      noResults.style.display = visible === 0 ? 'block' : 'none';
+    }
+  }
+
+  function setTag(tag: string | null) {
+    activeTag = tag;
+    tagBtns.forEach(btn => btn.classList.toggle('active', btn.dataset.tag === tag));
+    filter();
+  }
+
+  input?.addEventListener('input', filter);
+
+  tagBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      setTag(activeTag === btn.dataset.tag ? null : btn.dataset.tag ?? null);
+    });
+  });
+
+  tagChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const tag = chip.dataset.tag ?? null;
+      setTag(activeTag === tag ? null : tag);
+      input?.focus();
+    });
+  });
+</script>
