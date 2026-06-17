@@ -68,7 +68,7 @@ export const projects: Project[] = [
   // --- Tools & Apps ---
   {
     name: 'Divvy Up',
-    description: 'Split payment calculator for groups with multiple items. No accounts needed — just get a shareable link to save and share your split.',
+    description: 'Split payment calculator for groups with multiple items. No accounts needed, just get a shareable link to save and share your split.',
     url: 'https://divvy.chibbluffy.fyi',
     repo: 'https://github.com/Chibbluffy/divvy-up',
     tags: ['web', 'tool', 'finance'],
