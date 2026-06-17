@@ -5,7 +5,7 @@ date: 2026-05-11
 tags: ["init"]
 ---
 
-First post. Not sure what I'll write about here yet — probably a mix of tutorials, random how-tos, and things I figure out that felt worth writing down.
+First post. Not sure what I'll write about here yet. Probably a mix of tutorials, random how-tos, and things I figure out that felt worth writing down.
 
 ## What to expect
 
