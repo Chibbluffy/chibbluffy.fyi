@@ -8,7 +8,7 @@ tags: ["Cybersecurity", "Linux", "Kernel"]
 ## Thoughts
 I thought this was an absolute *crazy* find. It allows anyone to become root by modifying something in memory, so it is nearly untraceable. You can read more at [copy.fail](https://copy.fail). Basically anything linux based that was updated between 2017 and 2026 is vulnerable to this.
 
-This is a local privilege escalation — it requires an existing low-privilege shell on the target machine, whether physical or remote (e.g. via SSH).
+This is a local privilege escalation. It requires an existing low-privilege shell on the target machine, whether physical or remote (e.g. via SSH).
 
 I have not run this before, so idk how well it works. This is for research purposes only. Do NOT run this on any systems you do not own, and inspect any code yourself before running it. This is obviously heavily obfuscated, so even more reason to be careful with it. 
 
