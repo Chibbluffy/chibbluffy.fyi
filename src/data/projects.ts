@@ -67,6 +67,22 @@ export const projects: Project[] = [
   },
   // --- Tools & Apps ---
   {
+    name: 'Divvy Up',
+    description: 'Split payment calculator for groups with multiple items. No accounts needed — just get a shareable link to save and share your split.',
+    url: 'https://divvy.chibbluffy.fyi',
+    repo: 'https://github.com/Chibbluffy/divvy-up',
+    tags: ['web', 'tool', 'finance'],
+    category: 'tools',
+  },
+  {
+    name: 'neko (fork)',
+    description: 'Fork of neko, a self-hosted WebRTC virtual browser. Added chat improvements: image sharing, Giphy search, and an undockable fullscreen chat mode.',
+    url: 'https://watch.chibbluffy.fyi',
+    repo: 'https://github.com/Chibbluffy/neko',
+    tags: ['self-hosted', 'webrtc', 'docker'],
+    category: 'tools',
+  },
+  {
     name: 'Unattended Cooking Alert',
     description: 'Thermal camera on a Raspberry Pi Zero streams stove footage to a phone running Termux, which handles image processing and fires verbal alerts and notifications if the stove is left unattended. Built to help prevent kitchen fires for elderly or forgetful users.',
     repo: 'https://github.com/Chibbluffy/unattended-cooking-alert',
