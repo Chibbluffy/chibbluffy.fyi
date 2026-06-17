@@ -21,4 +21,8 @@ This one's stuck for now. I had planned to pull the camera feeds into [Frigate](
 
 ## What's next
 
-Adding Z-Wave and Zigbee hubs so I can use other sensors and IoT devices like my thermostat and whatever else I end up picking up. More to come...
+Adding Z-Wave and Zigbee hubs so I can use other sensors and IoT devices like my thermostat and whatever else I end up picking up.
+
+I'm also planning to pick up the [PineVoice](https://pine64.org) bundle. It comes with the PineVoice speaker, a Zigbee dongle, a power supply, and two Matter modules. I was already planning to grab a Zigbee dongle so this kills two birds with one stone. It also has a hardware privacy kill switch which I like. The PineVoice is also going to double as the mic and speaker for my local AI voice assistant project.
+
+More to come...
